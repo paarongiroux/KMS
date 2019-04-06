@@ -4,6 +4,6 @@ public class KMS
 {
     public static void main (String[] args)
     {
-      UserInterface ui = new UserInterface();
+      UIDisplay ui = new UIDisplay();
     }
 }
