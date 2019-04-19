@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class Menu 
 {
     private static double tax;
-    private ArrayList<MenuItem> menuItems;
+    private ArrayList<MenuItem> menuItems = new ArrayList<MenuItem>();
     
     
     public Menu(double stateTax)
@@ -37,6 +37,29 @@ public class Menu
         menuItems.add(item);
     }
     
+    public MenuItem getMenuItem(String name)
+    {
+        for( MenuItem item : menuItems )
+        {
+            if (item.getName() == name)
+            {
+                return item;
+            }
+        }
+        return null;
+    }
+    
+    public double getMenuItemPrice(String name)
+    {
+        for( MenuItem item : menuItems )
+        {
+            if (item.getName() == name)
+            {
+                return item.getPrice();
+            }
+        }
+        return 0;
+    }
     // TODO
     // Iterates through the menuItems ArrayList and adds them to the display.
     public void displayMenuItems()

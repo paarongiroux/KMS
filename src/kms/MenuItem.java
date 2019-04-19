@@ -30,8 +30,9 @@ public class MenuItem
     // Gets the price of a MenuItem with tax included.
     public double getPrice()
     {
-        double salesTax = Menu.getTax();
-        return basePrice + ( basePrice * salesTax );
+        //double salesTax = Menu.getTax();
+        //return basePrice + ( basePrice * salesTax );
+        return basePrice;
     }
     
     public void setPrice( double newPrice )
