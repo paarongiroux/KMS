@@ -104,6 +104,7 @@ public class Test
       menu.addItem( menuItems[ index ] );
       }
     
+    // Test the menuItems 
     for( index = 0; index < numOfMenuItems; index ++ )
       {
       
@@ -117,6 +118,7 @@ public class Test
         System.out.println( menuItem.checkAvailability() );
       }
     
+    // Test the ingredients
     System.out.println( "\nIngredient Tests\n=========================");
     
     for( index = 0; index < numOfIngredients; index++ )
@@ -126,6 +128,10 @@ public class Test
       
       System.out.println( "Ingredient Name: " + ingredient.getName() );
       System.out.println( "Ingredient Price: " + ingredient.getPrice() );  
+      System.out.println( "Ingredient availability: " + ingredient.checkIfAvailable() );
+      System.out.print( "Toggle availability: " );
+        ingredient.toggleAvailable();
+        System.out.println( ingredient.checkIfAvailable() );
       System.out.print( "Set units to ounces: " );
         ingredient.setUnits( "ounces" );
         System.out.println( ingredient.getUnits() );
