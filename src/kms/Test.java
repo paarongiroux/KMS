@@ -8,7 +8,10 @@ public class Test
     
     // Variables to change for testing purposes
     int numOfMenuItems = 9; 
+    int numOfIngredients = 5;
     double menuTax = 0.1; 
+    int index; 
+    
     String[] menuItemNames = 
           { 
             "Cheeseburger", 
@@ -22,33 +25,67 @@ public class Test
             "BLT Sandwich" 
           };
     
- 
-    // Test the individual ingredients 
-    MenuItem cheeseburger = new Food("Cheeseburger", 5.00, true);
-    MenuItem iceCream = new Food("Ice Cream", 3.25, true);
-    MenuItem lemonade = new Drink("Lemonade", 1.49, true);
-    MenuItem nachos = new Food("Nachos", 6.00, true);
-    MenuItem cereal = new Food("Cereal", 0.99, true);
-    MenuItem beer = new Alcohol("Beer", 2.00, true);
-    MenuItem chickenNoodleSoup = new Food("Chicken Noodle Soup", 4.00, true);
-    MenuItem houseSalad = new Food("House Salad", 5.20, true);
-    MenuItem bltSandwich = new Food("BLT Sandwich", 7.00, true);
+    double[] menuItemPrices = 
+          {
+              
+          5.00,
+          3.25,
+          1.49, 
+          6.00, 
+          0.99, 
+          2.00, 
+          4.00, 
+          5.20, 
+          7.00
+          };
     
+    String[] ingredientNames =
+          {
+          "Cheese", 
+          "Salt", 
+          "Chicken",
+          "Ground Beef", 
+          "Chicken Broth"
+             
+          };
+    
+    double[] ingredientPrices = 
+          {
+              
+          1.00,
+          0.10,
+          2.00,
+          3.00,
+          0.50
+          };
+    
+    /* 
+     * Create an array of ingredient objects to test
+     */
+    Ingredient[] ingredientList = new Ingredient[ numOfIngredients ];
+    
+    for( index = 0; index < numOfIngredients; index++ )
+      {
+      
+      ingredientList[ index ] = new Ingredient( ingredientNames[ index ], ingredientPrices[ index ]);
+      }
+    
+    /*
+     * Create an array of menuItem objects to test 
+     */
     MenuItem[] menuItems = new MenuItem[ numOfMenuItems ]; 
     
-    menuItems[ 0 ] = cheeseburger; 
-    menuItems[ 1 ] = iceCream; 
-    menuItems[ 2 ] = lemonade; 
-    menuItems[ 3 ] = nachos; 
-    menuItems[ 4 ] = cereal; 
-    menuItems[ 5 ] = beer; 
-    menuItems[ 6 ] = chickenNoodleSoup;
-    menuItems[ 7 ] = houseSalad; 
-    menuItems[ 8 ] = bltSandwich; 
+    for( index = 0; index < numOfMenuItems; index++ )
+      {
+      
+      menuItems[ index ] = new MenuItem( menuItemNames[ index ], menuItemPrices[ index ], true );
+      }
     
+    /*
+     * Tests 
+     */
     System.out.println( "MenuItem Tests\n=====================" );
     
-    int index; 
     for( index = 0; index < numOfMenuItems; index++ )
       {
       
@@ -70,13 +107,29 @@ public class Test
     for( index = 0; index < numOfMenuItems; index ++ )
       {
       
-      System.out.println( "Food name: " + 
-                          menu.getMenuItem( menuItemNames[ index ] ).getName() );
-      System.out.println( "Food price: " + 
-                          menu.getMenuItem( menuItemNames[ index ] ).getPrice() );
+      MenuItem menuItem = menu.getMenuItem( menuItemNames[ index ] );
+      
+      System.out.println( "Food name: " + menuItem.getName() );
+      System.out.println( "Food price: " + menuItem.getPrice() );
+      System.out.println( "Food availability: " + menuItem.checkAvailability() ); 
+      System.out.print( "Toggle availability: " );
+        menuItem.toggleAvailability();
+        System.out.println( menuItem.checkAvailability() );
       }
     
+    System.out.println( "\nIngredient Tests\n=========================");
     
+    for( index = 0; index < numOfIngredients; index++ )
+      {
+      
+      Ingredient ingredient = ingredientList[ index ];
+      
+      System.out.println( "Ingredient Name: " + ingredient.getName() );
+      System.out.println( "Ingredient Price: " + ingredient.getPrice() );  
+      System.out.print( "Set units to ounces: " );
+        ingredient.setUnits( "ounces" );
+        System.out.println( ingredient.getUnits() );
+      }
     
     
     
