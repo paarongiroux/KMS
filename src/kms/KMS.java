@@ -7,9 +7,9 @@ public class KMS
     
       /* Test is comment out, so if you want to run the tests, 
        * all you need to do is uncomment it */ 
-      //Test test = new Test(); 
+      Test test = new Test(); 
       
-      UIDisplay ui = new UIDisplay();
+      //UIDisplay ui = new UIDisplay();
       
       
     }

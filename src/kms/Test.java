@@ -71,10 +71,12 @@ public class Test
       {
       
       System.out.println( "Food name: " + 
-                          menu.getMenuItem( menuItemNames[ index ] ) );
+                          menu.getMenuItem( menuItemNames[ index ] ).getName() );
       System.out.println( "Food price: " + 
-                          menu.getMenuItem( menuItemNames[ index ] ) );
+                          menu.getMenuItem( menuItemNames[ index ] ).getPrice() );
       }
+    
+    
     
     
     
