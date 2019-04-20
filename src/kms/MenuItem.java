@@ -6,6 +6,7 @@
 package kms;
 
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -13,6 +14,8 @@ import java.util.ArrayList;
  */
 public class MenuItem 
 {
+    public ImageIcon menuPic;
+    
     private String name;
     private double basePrice;
     private boolean isAvailable;
@@ -24,7 +27,8 @@ public class MenuItem
         name = inputName;
         basePrice = inputPrice;
         isAvailable = availability;
-        
+        menuPic = Menu.getDefaultImg();
+           
     }
     
     // Gets the price of a MenuItem with tax included.
@@ -33,6 +37,7 @@ public class MenuItem
         //double salesTax = Menu.getTax();
         //return basePrice + ( basePrice * salesTax );
         return basePrice;
+        
     }
     
     public void setPrice( double newPrice )
@@ -48,6 +53,17 @@ public class MenuItem
     public void setName( String newName )
     {
         name = newName;
+    }
+    
+    public ImageIcon getImg()
+    {
+        return menuPic;
+    }
+    
+    public void setImg( String imgLocation )
+    {
+        ImageIcon newImg = new ImageIcon( imgLocation );
+        menuPic = newImg;
     }
     
     public boolean checkAvailability()
@@ -97,9 +113,17 @@ public class MenuItem
         ingredients.clear();
     }
     
-    
-    
-    
-    
+    public void ifOrdered()
+    {
+        // Create an instance of the database controller class.
+        IngredientDB db = new IngredientDB();
+        
+        // Iterate through the ingredients list
+        for( Ingredient ingredient : ingredients )
+        {
+            // Remove one unit of each ingredient from the database.
+            db.updateIngredient(ingredient, -1);
+        }
+    }
     
 }
