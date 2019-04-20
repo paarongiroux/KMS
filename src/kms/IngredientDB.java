@@ -30,15 +30,15 @@ public class IngredientDB
         {
             // Connect to the mysql database.
             Class.forName( dbDriver );
-            Connection conn = DriverManager.getConnection(dbURL, "root", "");
+            Connection conn = DriverManager.getConnection( dbURL, "root", "" );
 
             // Create an SQL "Date" object to record the date in which
             // the insert occurs.
             Calendar calendar = Calendar.getInstance();
-            java.sql.Date startDate = new java.sql.Date(calendar.getTime().getTime());
+            java.sql.Date startDate = new java.sql.Date( calendar.getTime().getTime() );
 
             // Create the structure of the insert query.
-            String query = " INSERT into INGREDIENTS  "
+            String query = "INSERT into INGREDIENTS "
                     
                     // Refer here for column names.
                     // More columns may be required for predictive calculations.
@@ -46,8 +46,8 @@ public class IngredientDB
                     // For now, usage_delta and date_since_delta may be used
                     // for snapshot predictive calculation. (1 week?)
                     + "(name, price, units, num_units, usage_delta, "
-                    + "date_since_delta, last_update, date_created)"
-                    + " values (?, ?, ?, ?, ?, ?)";
+                    + "date_since_delta, last_update, date_created) "
+                    + "values (?, ?, ?, ?, ?, ?)";
 
             // Pull data from passed-in Ingredient object.
             String ingName = ingredient.getName();
@@ -56,23 +56,23 @@ public class IngredientDB
 
             // Create the MySQL PreparedStatement object to perform
             // the INSERT statement.
-            PreparedStatement ps = conn.prepareStatement(query);
+            PreparedStatement ps = conn.prepareStatement( query );
             // name
-            ps.setString (1, ingName);
+            ps.setString ( 1, ingName );
             // price
-            ps.setDouble (2, ingPrice);
+            ps.setDouble ( 2, ingPrice );
             // units
-            ps.setString (3, ingUnits);
+            ps.setString ( 3, ingUnits );
             // num_units
-            ps.setDouble (4, startingNumUnits);
+            ps.setDouble ( 4, startingNumUnits );
             // usage_delta
-            ps.setDouble (5, 0);
+            ps.setDouble ( 5, 0 );
             // date_since_delta
-            ps.setDate   (6, startDate);
+            ps.setDate   ( 6, startDate );
             // last_update
-            ps.setDate   (7, startDate);
+            ps.setDate   ( 7, startDate );
             // date_created
-            ps.setDate   (8, startDate);
+            ps.setDate   ( 8, startDate );
 
             // Execute the prepared statement.
             ps.execute();
@@ -81,10 +81,10 @@ public class IngredientDB
             conn.close();
         }
         
-        catch (Exception e)
+        catch ( Exception e )
         {
             // If an Exception occurs, output the info.
-            System.err.println(e.getMessage());
+            System.err.println( e.getMessage() );
             
             // Return false to indicate failure.
             return false;
@@ -93,4 +93,49 @@ public class IngredientDB
         // true is returned if the ingredient was successfully added.
         return true;
     }
+    
+    public boolean updateIngredient( Ingredient ingredient, double change )
+    {
+        try
+        {
+            // Connect to the mysql database.
+            Class.forName( dbDriver );
+            Connection conn = DriverManager.getConnection( dbURL, "root", "" );
+
+            // the update occurs.
+            Calendar calendar = Calendar.getInstance();
+            java.sql.Date updateDate = new java.sql.Date( calendar.getTime().getTime() );
+
+            // Create the structure of the update query.       
+            String query = "UPDATE ingredients SET num_units = num_units + ?, "
+                         + "last_update = ? WHERE item_name = ?";
+            
+            PreparedStatement ps = conn.prepareStatement( query );
+            
+            // Fill in the question marks.
+            ps.setDouble ( 1, change );
+            ps.setDate   ( 2, updateDate );
+            ps.setString ( 3, ingredient.getName() );
+
+            // Execute the prepared statement.
+            ps.execute();
+
+            // Finally, close the connection.
+            conn.close();
+        }
+        
+        catch ( Exception e )
+        {
+            // If an Exception occurs, output the info.
+            System.err.println( e.getMessage() );
+            
+            // Return false to indicate failure.
+            return false;
+        }
+        
+        // true is returned if the ingredient was successfully added.
+        return true;
+    }
+    
+    
 }

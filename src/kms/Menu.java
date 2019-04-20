@@ -6,6 +6,7 @@
 package kms;
 
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -14,6 +15,8 @@ import java.util.ArrayList;
 public class Menu 
 {
     private static double tax;
+    private static ImageIcon defaultImg = new ImageIcon("assets/no_image_avail.png");
+    
     private ArrayList<MenuItem> menuItems = new ArrayList<MenuItem>();
     
     
@@ -47,6 +50,11 @@ public class Menu
             }
         }
         return null;
+    }
+    
+    public static ImageIcon getDefaultImg()
+    {
+        return defaultImg;
     }
     
     public double getMenuItemPrice(String name)
