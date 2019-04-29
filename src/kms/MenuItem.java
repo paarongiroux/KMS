@@ -20,7 +20,7 @@ public class MenuItem
     private double basePrice;
     private boolean isAvailable;
     
-    ArrayList<Ingredient> ingredients;
+    ArrayList<Ingredient> ingredients = new ArrayList<Ingredient>();
     
     public MenuItem( String inputName, double inputPrice, boolean availability )
     {

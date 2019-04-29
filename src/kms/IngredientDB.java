@@ -14,14 +14,10 @@ import java.util.Calendar;
 public class IngredientDB 
 {
     // TODO: Add URL and Driver strings when DB is created.
-    String dbURL = "";
-    String dbDriver = "";
-    
-    
-    public boolean connectToDB( String uri )
-    {
-        return true;
-    }
+    String dbURL = "jdbc:mysql://db_ip:3306/2EeZsvHRYv";
+    String dbDriver = "com.mysql.jdbc.Driver";
+    String un = "2EeZsvHRYv";
+    String p = "Uk6UUrlbAy";
     
     public boolean addIngredientToDB( Ingredient ingredient, 
                                         double startingNumUnits )
@@ -30,7 +26,7 @@ public class IngredientDB
         {
             // Connect to the mysql database.
             Class.forName( dbDriver );
-            Connection conn = DriverManager.getConnection( dbURL, "root", "" );
+            Connection conn = DriverManager.getConnection( dbURL, un, p );
 
             // Create an SQL "Date" object to record the date in which
             // the insert occurs.
@@ -45,7 +41,7 @@ public class IngredientDB
                     
                     // For now, usage_delta and date_since_delta may be used
                     // for snapshot predictive calculation. (1 week?)
-                    + "(name, price, units, num_units, usage_delta, "
+                    + "(item_name, price, units, num_units, usage_delta, "
                     + "date_since_delta, last_update, date_created) "
                     + "values (?, ?, ?, ?, ?, ?)";
 
@@ -84,7 +80,8 @@ public class IngredientDB
         catch ( Exception e )
         {
             // If an Exception occurs, output the info.
-            System.err.println( e.getMessage() );
+            System.out.println( e.getCause() );
+            System.out.println( e.getMessage() );
             
             // Return false to indicate failure.
             return false;
@@ -100,7 +97,7 @@ public class IngredientDB
         {
             // Connect to the mysql database.
             Class.forName( dbDriver );
-            Connection conn = DriverManager.getConnection( dbURL, "root", "" );
+            Connection conn = DriverManager.getConnection( dbURL, un, p );
 
             // the update occurs.
             Calendar calendar = Calendar.getInstance();
@@ -127,7 +124,7 @@ public class IngredientDB
         catch ( Exception e )
         {
             // If an Exception occurs, output the info.
-            System.err.println( e.getMessage() );
+            System.out.println( e.getMessage() );
             
             // Return false to indicate failure.
             return false;

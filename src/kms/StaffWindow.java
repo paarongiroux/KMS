@@ -69,7 +69,7 @@ public class StaffWindow extends JPanel implements MouseListener
            ordersList += " Order " + (i+1) + ": ";
            if (!restaurant.getOrder(i).status())
            {
-               ordersList += "IN PROGRESSS <br>";
+               ordersList += "IN PROGRESS <br>";
            }
            else if(restaurant.getOrder(i).status())
            {

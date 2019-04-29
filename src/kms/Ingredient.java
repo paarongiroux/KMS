@@ -14,7 +14,7 @@ public class Ingredient
     private String name;
     private double totalPrice;
     private String units;
-    private boolean isAvailable = true;
+    private boolean isAvailable = false;
     
     public Ingredient( String inputName, double inputPrice )
     {
